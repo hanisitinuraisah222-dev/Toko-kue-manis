@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Mainkan kisah Angkasa, aktor muda yang membangun toko kue modern di Bangkok. Kelola pesanan, ikuti tren, dan temukan akhir cerita yang hangat.">
+<meta name="author" content="Studio Senja">
+<meta name="theme-color" content="#25352f">
+<meta name="color-scheme" content="dark light">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kue Angkasa">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="game">
+<meta property="og:title" content="Kue Angkasa — Kisah di Bangkok">
+<meta property="og:description" content="Bangun toko kue, kelola jadwal akting, dan ikuti kisah Angkasa di Bangkok.">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Kue Angkasa">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kue Angkasa — Kisah di Bangkok">
+<meta name="twitter:description" content="Bangun toko kue, kelola jadwal akting, dan ikuti kisah Angkasa di Bangkok.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2325352f'/%3E%3Cpath d='M12 43h40L46 27H18z' fill='%23f0c58c'/%3E%3Cpath d='M19 27c0-8 6-13 13-13s13 5 13 13' fill='%23e58c73'/%3E%3Ccircle cx='32' cy='10' r='3' fill='%23f4e9d6'/%3E%3C/svg%3E">
+<title>Kue Angkasa — Kisah di Bangkok</title>
+<style>
+:root{--forest:oklch(29% .045 158);--forest2:oklch(38% .055 158);--cream:oklch(94% .035 83);--paper:oklch(89% .045 78);--ink:oklch(24% .035 155);--muted:oklch(48% .035 150);--coral:oklch(69% .13 37);--gold:oklch(79% .12 79);--line:oklch(78% .035 80);--display:Georgia,"Times New Roman",serif;--body:"Trebuchet MS",Verdana,sans-serif}
+*{box-sizing:border-box}
+html{min-height:100%;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+body{margin:0;min-height:100vh;min-height:100dvh;background:var(--cream);color:var(--ink);font:16px/1.5 var(--body);touch-action:manipulation}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.055;z-index:10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E")}
+button{font:inherit;cursor:pointer;min-height:46px;border:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+button:disabled{opacity:.48;cursor:not-allowed}
+.app{max-width:1180px;margin:auto;padding:env(safe-area-inset-top) 24px calc(24px + env(safe-area-inset-bottom))}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:22px;font-weight:bold;letter-spacing:-.03em}
+.brand-mark{width:42px;height:42px;background:var(--forest);border-radius:13px;display:grid;place-items:center;color:var(--gold)}
+.nav{display:flex;gap:8px;align-items:center}
+.nav button{background:transparent;color:var(--ink);padding:8px 12px;border-radius:5px}
+.nav button:hover{background:var(--paper)}
+.menu-toggle{display:none;background:var(--forest);color:var(--cream);padding:0 14px;border-radius:6px}
+main{padding:26px 0 10px}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:bold;color:var(--forest2)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:32px 0 28px}
+h1,h2,h3,p{margin-top:0}
+h1{font:clamp(42px,7vw,76px)/.98 var(--display);letter-spacing:-.045em;max-width:700px;margin:14px 0 18px}
+h2{font:clamp(28px,4vw,42px)/1.05 var(--display);letter-spacing:-.03em;margin-bottom:12px}
+h3{font:22px/1.15 var(--display);margin-bottom:8px}
+.lede{font-size:18px;max-width:560px;color:var(--muted)}
+.hero-art{min-height:260px;background:var(--forest);color:var(--cream);position:relative;overflow:hidden;border-radius:4px 70px 4px 4px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-art:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #e9c78c66;border-radius:50%;right:-38px;top:24px;box-shadow:0 0 0 24px #e9c78c10,0 0 0 50px #e9c78c0a}
+.shop-illustration{position:relative;z-index:1;align-self:center;font-size:104px;line-height:1.1;filter:drop-shadow(5px 8px 0 #14231e)}
+.art-caption{position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;color:#f0d8b2;font-size:13px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.primary,.secondary,.quiet{padding:12px 18px;border-radius:4px;font-weight:bold}
+.primary{background:var(--coral);color:#2d211d}
+.primary:hover{background:var(--gold)}
+.secondary{background:var(--forest);color:var(--cream)}
+.secondary:hover{background:var(--forest2)}
+.quiet{background:transparent;color:var(--forest);border:1px solid var(--line)}
+.quiet:hover{background:var(--paper)}
+.screen{display:none;animation:arrive .35s ease both}
+.screen.active{display:block}
+@keyframes arrive{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line);margin:18px 0 24px}
+.stat{padding:14px 16px;border-right:1px solid var(--line)}
+.stat:last-child{border:0}
+.stat small{display:block;color:var(--muted);font-size:12px}
+.stat strong{font:25px var(--display)}
+.game-layout{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start}
+.panel{background:var(--paper);padding:22px;border-radius:4px}
+.panel.dark{background:var(--forest);color:var(--cream)}
+.panel.dark p,.panel.dark small{color:#d8ddcf}
+.dayline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.dayline strong{font:24px var(--display)}
+.order-list{display:grid;gap:10px}
+.order{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px;background:var(--cream);border-left:3px solid var(--coral)}
+.order p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.order button{padding:8px 12px;min-height:42px;background:var(--forest);color:var(--cream);border-radius:3px}
+.order button:hover{background:var(--forest2)}
+.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.mini{padding:14px;background:var(--cream);border:1px solid var(--line)}
+.mini strong{display:block;font:22px var(--display)}
+.progress{height:9px;background:var(--line);overflow:hidden;margin:10px 0 14px}
+.progress span{height:100%;display:block;background:var(--coral);width:0;transition:width .3s}
+.story{max-width:760px;margin:18px auto 50px}
+.story-box{background:var(--forest);color:var(--cream);padding:clamp(22px,5vw,42px);border-radius:4px 50px 4px 4px}
+.story-box p{font-size:18px;line-height:1.7;color:#f0e8d8}
+.story-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.upgrade{padding:18px;border:1px solid var(--line);background:var(--paper)}
+.upgrade .emoji{font-size:32px}
+.upgrade p{font-size:14px;color:var(--muted);min-height:42px}
+.upgrade button{width:100%;background:var(--forest);color:var(--cream);border-radius:3px}
+.form-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+select,input[type=range]{font:inherit}
+select{padding:9px;border:1px solid var(--line);background:var(--cream);color:var(--ink);border-radius:3px;font-size:16px}
+.notice{min-height:28px;margin:12px 0;color:var(--forest2);font-weight:bold}
+footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:#14231edb;z-index:20;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.open{display:flex}
+.modal-card{background:var(--cream);max-width:520px;width:100%;padding:28px;border-radius:4px 32px 4px 4px;max-height:90dvh;overflow:auto}
+.modal-card p{color:var(--muted)}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--forest);color:var(--cream);padding:12px 18px;z-index:30;max-width:90%;text-align:center;display:none;border-radius:4px}
+.toast.show{display:block}
+@media(max-width:900px){.hero{grid-template-columns:1fr .8fr}.game-layout{grid-template-columns:1fr 280px}.shop-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.app{padding-inline:18px}.hero{grid-template-columns:1fr}.hero-art{min-height:190px}.shop-illustration{font-size:76px}.game-layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.nav{display:none;position:absolute;top:72px;right:18px;left:18px;background:var(--cream);border:1px solid var(--line);padding:10px;z-index:15;box-shadow:0 12px 24px #18251d20;flex-direction:column;align-items:stretch}.nav.open{display:flex}.nav button{text-align:left}.menu-toggle{display:block}.topbar{position:relative}}
+@media(max-width:480px){.app{padding-inline:14px}.brand{font-size:19px}.hero{padding-top:22px}.hero-art{min-height:170px}.shop-grid{grid-template-columns:1fr}.panel{padding:17px}.order{align-items:flex-start}.order button{white-space:nowrap}.stats{margin-top:10px}.story-box{border-radius:4px 30px 4px 4px}.actions>*{flex:1 1 auto}}
+@media(min-width:1200px){.app{padding-inline:34px}.hero{padding-block:48px}.hero-art{min-height:330px}}
+@media(orientation:landscape) and (max-height:520px){.hero{grid-template-columns:1fr 1fr;padding-block:12px}.hero-art{min-height:180px}.shop-illustration{font-size:68px}main{padding-top:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+<div class="brand"><span class="brand-mark" aria-hidden="true">✦</span> Kue Angkasa</div>
+<button class="menu-toggle" id="menuToggle" aria-label="Buka navigasi" aria-expanded="false">☰</button>
+<nav class="nav" id="nav" aria-label="Navigasi utama">
+<button data-screen="home">Beranda</button>
+<button data-screen="play">Toko</button>
+<button data-screen="story">Cerita</button>
+<button data-screen="settings">Pengaturan</button>
+</nav>
+</header>
+<main>
+<section class="screen active" id="home">
+<div class="hero">
+<div>
+<div class="eyebrow">Bangkok, Thailand · Kisah simulasi</div>
+<h1>Resep kecil,<br>mimpi yang besar.</h1>
+<p class="lede">Angkasa adalah aktor muda yang diam-diam punya mimpi lain: membangun toko kue yang selalu ramai. Di antara jadwal syuting dan aroma roti hangat, ia akan menemukan bahwa beberapa hal terbaik datang tanpa terburu-buru.</p>
+<div class="actions">
+<button class="primary" id="startBtn">Mulai kisah ↗</button>
+<button class="quiet" id="howBtn">Cara bermain</button>
+</div>
+<p class="notice" id="homeNotice" aria-live="polite"></p>
+</div>
+<div class="hero-art" aria-label="Ilustrasi toko kue kecil" role="img">
+<div class="eyebrow" style="color:#e9c78c">ANGKASA BAKEHOUSE · EST. 2026</div>
+<div class="shop-illustration" aria-hidden="true">🥐</div>
+<div class="art-caption"><span>Fresh from the oven</span><span>Sukhumvit · BKK</span></div>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><small>Hari berjalan</small><strong id="homeDay">1</strong></div>
+<div class="stat"><small>Saldo toko</small><strong id="homeMoney">฿120</strong></div>
+<div class="stat"><small>Popularitas</small><strong id="homeFame">0</strong></div>
+<div class="stat"><small>Pesanan selesai</small><strong id="homeOrders">0</strong></div>
+</div>
+<div class="eyebrow">Catatan pemilik</div>
+<h2>“Satu hari, satu adonan.”</h2>
+<p style="max-width:650px;color:var(--muted)">Mulailah dari kios sederhana. Atur stok, layani pelanggan, sisihkan waktu untuk pekerjaan akting, dan ikuti tren dessert Bangkok.</p>
+</section>
+
+<section class="screen" id="play">
+<div class="dayline"><div><div class="eyebrow">Operasional toko</div><strong id="dayLabel">Hari 1 · Senin</strong></div><button class="quiet" id="pauseBtn">Ⅱ Jeda</button></div>
+<div class="stats">
+<div class="stat"><small>Saldo</small><strong id="money">฿120</strong></div>
+<div class="stat"><small>Popularitas</small><strong id="fame">0</strong></div>
+<div class="stat"><small>Energi Angkasa</small><strong id="energy">5/5</strong></div>
+<div class="stat"><small>Pesanan selesai</small><strong id="ordersDone">0</strong></div>
+</div>
+<div class="game-layout">
+<div class="panel">
+<div class="eyebrow">Etalase hari ini</div>
+<h2 id="trendTitle">Tren: Thai Tea Cream Bun</h2>
+<p id="trendDesc" style="color:var(--muted)">Pelanggan sedang mencari rasa yang familiar dengan tampilan baru.</p>
+<div class="progress" aria-label="Kemajuan reputasi"><span id="fameBar"></span></div>
+<div class="dayline"><strong style="font-size:20px">Pesanan masuk</strong><small id="orderCount">3 pesanan tersedia</small></div>
+<div class="order-list" id="orders"></div>
+<p class="notice" id="gameNotice" aria-live="polite">Pilih pesanan, lalu buat kuenya.</p>
+<div class="actions">
+<button class="primary" id="nextDayBtn">Tutup toko & lanjut hari</button>
+<button class="quiet" id="actorBtn">Jadwal syuting · 1 energi</button>
+</div>
+</div>
+<aside class="panel dark">
+<div class="eyebrow" style="color:#e9c78c">Ruang produksi</div>
+<h2>Persiapan dapur</h2>
+<p>Setiap pesanan yang selesai menambah saldo dan reputasi. Pesanan tren memberi bonus.</p>
+<div class="mini-grid">
+<div class="mini"><small>Bahan tersedia</small><strong id="stock">8</strong></div>
+<div class="mini"><small>Peralatan</small><strong id="equipment">Lv. 1</strong></div>
+<div class="mini"><small>Pengikut</small><strong id="followers">0</strong></div>
+<div class="mini"><small>Jadwal aktor</small><strong id="acting">Belum</strong></div>
+</div>
+<div class="actions"><button class="primary" id="upgradeBtn">Lihat pengembangan</button></div>
+</aside>
+</div>
+</section>
+
+<section class="screen" id="story">
+<div class="story">
+<div class="eyebrow">Di balik etalase · Album perjalanan</div>
+<h2>Setiap hari punya cerita.</h2>
+<div class="story-box">
+<div class="eyebrow" id="chapterLabel" style="color:#e9c78c">Bab 1 · Aroma pertama</div>
+<h2 id="storyTitle" style="color:var(--cream)">Sebuah kios di Bangkok</h2>
+<p id="storyText">Angkasa baru saja menyewa kios mungil di sudut jalan Bangkok. Pagi hari ia membaca naskah untuk syuting, sore hari ia menimbang tepung dan menata etalase. Ia belum punya banyak pelanggan, tetapi ia punya resep keluarga dan keberanian untuk mencoba.</p>
+<div class="story-actions">
+<button class="primary" id="storyNext">Lanjutkan cerita</button>
+<button class="quiet" id="storyBack" style="color:var(--cream);border-color:#d5d9ce">Kembali ke toko</button>
+</div>
+</div>
+<p class="notice" id="storyNotice" aria-live="polite"></p>
+</div>
+</section>
+
+<section class="screen" id="upgrades">
+<div class="eyebrow">Pengembangan toko</div>
+<h2>Buat dapur makin siap.</h2>
+<p style="color:var(--muted)">Belanjakan saldo untuk meningkatkan kapasitas produksi dan pengalaman pelanggan.</p>
+<div class="shop-grid" id="upgradeList"></div>
+<div class="actions"><button class="quiet" id="upgradeBack">Kembali ke toko</button></div>
+<p class="notice" id="upgradeNotice" aria-live="polite"></p>
+</section>
+
+<section class="screen" id="settings">
+<div class="eyebrow">Preferensi permainan</div>
+<h2>Atur pengalamanmu.</h2>
+<div class="panel" style="max-width:700px">
+<div class="form-row"><div><strong>Efek suara</strong><br><small>Suara singkat saat aksi berhasil</small></div><input type="checkbox" id="soundToggle" checked aria-label="Aktifkan efek suara"></div>
+<div class="form-row"><div><strong>Tingkat tantangan</strong><br><small>Memengaruhi harga bahan dan bonus</small></div><select id="difficulty"><option value="easy">Santai</option><option value="normal">Seimbang</option><option value="hard">Menantang</option></select></div>
+<div class="form-row"><div><strong>Animasi</strong><br><small>Kurangi gerakan dekoratif</small></div><input type="checkbox" id="motionToggle" aria-label="Kurangi animasi"></div>
+<p class="notice" id="settingsNotice" aria-live="polite">Pengaturan tersimpan otomatis di perangkat ini.</p>
+<div class="actions">
+<button class="quiet" id="resetBtn">Hapus progres tersimpan</button>
+<button class="secondary" id="settingsBack">Selesai</button>
+</div>
+</div>
+</section>
+
+<section class="screen" id="ending">
+<div class="story">
+<div class="eyebrow">Epilog · Sebuah rumah bernama bahagia</div>
+<div class="story-box">
+<div style="font-size:42px" aria-hidden="true">🌼 🥂</div>
+<h2 style="color:var(--cream)">Dari etalase kecil, menuju hari istimewa.</h2>
+<p>Beberapa tahun berlalu. Angkasa kini dikenal sebagai aktor sekaligus pemilik toko kue yang menjadi tempat singgah favorit di Bangkok. Dalam sebuah acara amal, ia akhirnya berbincang lebih lama dengan seseorang yang sejak dulu ia kagumi—seorang seniman yang selalu mendukung karya-karyanya dari kejauhan.</p>
+<p>Persahabatan mereka tumbuh menjadi cinta yang saling menghargai. Pada hari yang hangat, di antara keluarga, sahabat, dan aroma kue favorit, Angkasa dan orang yang ia kagumi mengikat janji untuk menjalani hidup bersama.</p>
+<p>Tokonya tetap buka. Kini, ada satu kursi di dekat jendela yang selalu disiapkan untuk dua orang.</p>
+<div class="story-actions">
+<button class="primary" id="endingRestart">Main lagi dari awal</button>
+<button class="quiet" id="endingHome" style="color:var(--cream);border-color:#d5d9ce">Ke beranda</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer><span>© 2026 Kue Angkasa · Cerita fiksi di Bangkok</span><span>Diracik dengan sabar, disajikan hangat.</span></footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-card">
+<div class="eyebrow">Kue Angkasa</div>
+<h2 id="modalTitle">Jeda sebentar</h2>
+<div id="modalBody"><p>Permainan dijeda.</p></div>
+<div class="modal-actions" id="modalActions"></div>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+const KEY='app_v1_state';
+const DAYS=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+const RECIPES=[
+{name:'Thai Tea Cream Bun',emoji:'🧋',price:34,cost:12,trend:true,desc:'Roti lembut dengan krim thai tea.'},
+{name:'Mango Sticky Rice Tart',emoji:'🥭',price:42,cost:16,trend:false,desc:'Tart mangga dengan sentuhan ketan.'},
+{name:'Coconut Pandan Roll',emoji:'🍃',price:30,cost:10,trend:false,desc:'Gulungan pandan dan kelapa.'},
+{name:'Strawberry Milk Cake',emoji:'🍓',price:38,cost:14,trend:false,desc:'Kue susu dengan stroberi segar.'},
+{name:'Chocolate Cloud',emoji:'🍫',price:36,cost:13,trend:false,desc:'Kue cokelat dengan krim ringan.'},
+{name:'Butter Croissant',emoji:'🥐',price:28,cost:9,trend:false,desc:'Pastry renyah berlapis mentega.'}
+];
+const UPGRADES=[
+{id:'oven',name:'Oven presisi',emoji:'♨️',price:90,desc:'Produksi lebih efisien. Bonus saldo +฿4 per pesanan.'},
+{id:'display',name:'Etalase kaca',emoji:'🪟',price:120,desc:'Tampilan toko lebih menarik. Popularitas bertambah.'},
+{id:'social',name:'Kamera konten',emoji:'📸',price:150,desc:'Ko
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Mainkan kisah Angkasa, aktor muda yang membangun toko kue modern di Bangkok. Kelola pesanan, ikuti tren, dan temukan akhir cerita yang hangat.">
+<meta name="author" content="Studio Senja">
+<meta name="theme-color" content="#25352f">
+<meta name="color-scheme" content="dark light">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kue Angkasa">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="game">
+<meta property="og:title" content="Kue Angkasa — Kisah di Bangkok">
+<meta property="og:description" content="Bangun toko kue, kelola jadwal akting, dan ikuti kisah Angkasa di Bangkok.">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Kue Angkasa">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kue Angkasa — Kisah di Bangkok">
+<meta name="twitter:description" content="Bangun toko kue, kelola jadwal akting, dan ikuti kisah Angkasa di Bangkok.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2325352f'/%3E%3Cpath d='M12 43h40L46 27H18z' fill='%23f0c58c'/%3E%3Cpath d='M19 27c0-8 6-13 13-13s13 5 13 13' fill='%23e58c73'/%3E%3Ccircle cx='32' cy='10' r='3' fill='%23f4e9d6'/%3E%3C/svg%3E">
+<title>Kue Angkasa — Kisah di Bangkok</title>
+<style>
+:root{--forest:oklch(29% .045 158);--forest2:oklch(38% .055 158);--cream:oklch(94% .035 83);--paper:oklch(89% .045 78);--ink:oklch(24% .035 155);--muted:oklch(48% .035 150);--coral:oklch(69% .13 37);--gold:oklch(79% .12 79);--line:oklch(78% .035 80);--display:Georgia,"Times New Roman",serif;--body:"Trebuchet MS",Verdana,sans-serif}
+*{box-sizing:border-box}
+html{min-height:100%;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+body{margin:0;min-height:100vh;min-height:100dvh;background:var(--cream);color:var(--ink);font:16px/1.5 var(--body);touch-action:manipulation}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.055;z-index:10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E")}
+button{font:inherit;cursor:pointer;min-height:46px;border:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+button:disabled{opacity:.48;cursor:not-allowed}
+.app{max-width:1180px;margin:auto;padding:env(safe-area-inset-top) 24px calc(24px + env(safe-area-inset-bottom))}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:22px;font-weight:bold;letter-spacing:-.03em}
+.brand-mark{width:42px;height:42px;background:var(--forest);border-radius:13px;display:grid;place-items:center;color:var(--gold)}
+.nav{display:flex;gap:8px;align-items:center}
+.nav button{background:transparent;color:var(--ink);padding:8px 12px;border-radius:5px}
+.nav button:hover{background:var(--paper)}
+.menu-toggle{display:none;background:var(--forest);color:var(--cream);padding:0 14px;border-radius:6px}
+main{padding:26px 0 10px}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:bold;color:var(--forest2)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:32px 0 28px}
+h1,h2,h3,p{margin-top:0}
+h1{font:clamp(42px,7vw,76px)/.98 var(--display);letter-spacing:-.045em;max-width:700px;margin:14px 0 18px}
+h2{font:clamp(28px,4vw,42px)/1.05 var(--display);letter-spacing:-.03em;margin-bottom:12px}
+h3{font:22px/1.15 var(--display);margin-bottom:8px}
+.lede{font-size:18px;max-width:560px;color:var(--muted)}
+.hero-art{min-height:260px;background:var(--forest);color:var(--cream);position:relative;overflow:hidden;border-radius:4px 70px 4px 4px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-art:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #e9c78c66;border-radius:50%;right:-38px;top:24px;box-shadow:0 0 0 24px #e9c78c10,0 0 0 50px #e9c78c0a}
+.shop-illustration{position:relative;z-index:1;align-self:center;font-size:104px;line-height:1.1;filter:drop-shadow(5px 8px 0 #14231e)}
+.art-caption{position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;color:#f0d8b2;font-size:13px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.primary,.secondary,.quiet{padding:12px 18px;border-radius:4px;font-weight:bold}
+.primary{background:var(--coral);color:#2d211d}
+.primary:hover{background:var(--gold)}
+.secondary{background:var(--forest);color:var(--cream)}
+.secondary:hover{background:var(--forest2)}
+.quiet{background:transparent;color:var(--forest);border:1px solid var(--line)}
+.quiet:hover{background:var(--paper)}
+.screen{display:none;animation:arrive .35s ease both}
+.screen.active{display:block}
+@keyframes arrive{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line);margin:18px 0 24px}
+.stat{padding:14px 16px;border-right:1px solid var(--line)}
+.stat:last-child{border:0}
+.stat small{display:block;color:var(--muted);font-size:12px}
+.stat strong{font:25px var(--display)}
+.game-layout{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start}
+.panel{background:var(--paper);padding:22px;border-radius:4px}
+.panel.dark{background:var(--forest);color:var(--cream)}
+.panel.dark p,.panel.dark small{color:#d8ddcf}
+.dayline{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.dayline strong{font:24px var(--display)}
+.order-list{display:grid;gap:10px}
+.order{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px;background:var(--cream);border-left:3px solid var(--coral)}
+.order p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.order button{padding:8px 12px;min-height:42px;background:var(--forest);color:var(--cream);border-radius:3px}
+.order button:hover{background:var(--forest2)}
+.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.mini{padding:14px;background:var(--cream);border:1px solid var(--line)}
+.mini strong{display:block;font:22px var(--display)}
+.progress{height:9px;background:var(--line);overflow:hidden;margin:10px 0 14px}
+.progress span{height:100%;display:block;background:var(--coral);width:0;transition:width .3s}
+.story{max-width:760px;margin:18px auto 50px}
+.story-box{background:var(--forest);color:var(--cream);padding:clamp(22px,5vw,42px);border-radius:4px 50px 4px 4px}
+.story-box p{font-size:18px;line-height:1.7;color:#f0e8d8}
+.story-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.upgrade{padding:18px;border:1px solid var(--line);background:var(--paper)}
+.upgrade .emoji{font-size:32px}
+.upgrade p{font-size:14px;color:var(--muted);min-height:42px}
+.upgrade button{width:100%;background:var(--forest);color:var(--cream);border-radius:3px}
+.form-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+select,input[type=range]{font:inherit}
+select{padding:9px;border:1px solid var(--line);background:var(--cream);color:var(--ink);border-radius:3px;font-size:16px}
+.notice{min-height:28px;margin:12px 0;color:var(--forest2);font-weight:bold}
+footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:#14231edb;z-index:20;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.open{display:flex}
+.modal-card{background:var(--cream);max-width:520px;width:100%;padding:28px;border-radius:4px 32px 4px 4px;max-height:90dvh;overflow:auto}
+.modal-card p{color:var(--muted)}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--forest);color:var(--cream);padding:12px 18px;z-index:30;max-width:90%;text-align:center;display:none;border-radius:4px}
+.toast.show{display:block}
+@media(max-width:900px){.hero{grid-template-columns:1fr .8fr}.game-layout{grid-template-columns:1fr 280px}.shop-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.app{padding-inline:18px}.hero{grid-template-columns:1fr}.hero-art{min-height:190px}.shop-illustration{font-size:76px}.game-layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.nav{display:none;position:absolute;top:72px;right:18px;left:18px;background:var(--cream);border:1px solid var(--line);padding:10px;z-index:15;box-shadow:0 12px 24px #18251d20;flex-direction:column;align-items:stretch}.nav.open{display:flex}.nav button{text-align:left}.menu-toggle{display:block}.topbar{position:relative}}
+@media(max-width:480px){.app{padding-inline:14px}.brand{font-size:19px}.hero{padding-top:22px}.hero-art{min-height:170px}.shop-grid{grid-template-columns:1fr}.panel{padding:17px}.order{align-items:flex-start}.order button{white-space:nowrap}.stats{margin-top:10px}.story-box{border-radius:4px 30px 4px 4px}.actions>*{flex:1 1 auto}}
+@media(min-width:1200px){.app{padding-inline:34px}.hero{padding-block:48px}.hero-art{min-height:330px}}
+@media(orientation:landscape) and (max-height:520px){.hero{grid-template-columns:1fr 1fr;padding-block:12px}.hero-art{min-height:180px}.shop-illustration{font-size:68px}main{padding-top:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+<div class="brand"><span class="brand-mark" aria-hidden="true">✦</span> Kue Angkasa</div>
+<button class="menu-toggle" id="menuToggle" aria-label="Buka navigasi" aria-expanded="false">☰</button>
+<nav class="nav" id="nav" aria-label="Navigasi utama">
+<button data-screen="home">Beranda</button>
+<button data-screen="play">Toko</button>
+<button data-screen="story">Cerita</button>
+<button data-screen="settings">Pengaturan</button>
+</nav>
+</header>
+<main>
+<section class="screen active" id="home">
+<div class="hero">
+<div>
+<div class="eyebrow">Bangkok, Thailand · Kisah simulasi</div>
+<h1>Resep kecil,<br>mimpi yang besar.</h1>
+<p class="lede">Angkasa adalah aktor muda yang diam-diam punya mimpi lain: membangun toko kue yang selalu ramai. Di antara jadwal syuting dan aroma roti hangat, ia akan menemukan bahwa beberapa hal terbaik datang tanpa terburu-buru.</p>
+<div class="actions">
+<button class="primary" id="startBtn">Mulai kisah ↗</button>
+<button class="quiet" id="howBtn">Cara bermain</button>
+</div>
+<p class="notice" id="homeNotice" aria-live="polite"></p>
+</div>
+<div class="hero-art" aria-label="Ilustrasi toko kue kecil" role="img">
+<div class="eyebrow" style="color:#e9c78c">ANGKASA BAKEHOUSE · EST. 2026</div>
+<div class="shop-illustration" aria-hidden="true">🥐</div>
+<div class="art-caption"><span>Fresh from the oven</span><span>Sukhumvit · BKK</span></div>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><small>Hari berjalan</small><strong id="homeDay">1</strong></div>
+<div class="stat"><small>Saldo toko</small><strong id="homeMoney">฿120</strong></div>
+<div class="stat"><small>Popularitas</small><strong id="homeFame">0</strong></div>
+<div class="stat"><small>Pesanan selesai</small><strong id="homeOrders">0</strong></div>
+</div>
+<div class="eyebrow">Catatan pemilik</div>
+<h2>“Satu hari, satu adonan.”</h2>
+<p style="max-width:650px;color:var(--muted)">Mulailah dari kios sederhana. Atur stok, layani pelanggan, sisihkan waktu untuk pekerjaan akting, dan ikuti tren dessert Bangkok.</p>
+</section>
+
+<section class="screen" id="play">
+<div class="dayline"><div><div class="eyebrow">Operasional toko</div><strong id="dayLabel">Hari 1 · Senin</strong></div><button class="quiet" id="pauseBtn">Ⅱ Jeda</button></div>
+<div class="stats">
+<div class="stat"><small>Saldo</small><strong id="money">฿120</strong></div>
+<div class="stat"><small>Popularitas</small><strong id="fame">0</strong></div>
+<div class="stat"><small>Energi Angkasa</small><strong id="energy">5/5</strong></div>
+<div class="stat"><small>Pesanan selesai</small><strong id="ordersDone">0</strong></div>
+</div>
+<div class="game-layout">
+<div class="panel">
+<div class="eyebrow">Etalase hari ini</div>
+<h2 id="trendTitle">Tren: Thai Tea Cream Bun</h2>
+<p id="trendDesc" style="color:var(--muted)">Pelanggan sedang mencari rasa yang familiar dengan tampilan baru.</p>
+<div class="progress" aria-label="Kemajuan reputasi"><span id="fameBar"></span></div>
+<div class="dayline"><strong style="font-size:20px">Pesanan masuk</strong><small id="orderCount">3 pesanan tersedia</small></div>
+<div class="order-list" id="orders"></div>
+<p class="notice" id="gameNotice" aria-live="polite">Pilih pesanan, lalu buat kuenya.</p>
+<div class="actions">
+<button class="primary" id="nextDayBtn">Tutup toko & lanjut hari</button>
+<button class="quiet" id="actorBtn">Jadwal syuting · 1 energi</button>
+</div>
+</div>
+<aside class="panel dark">
+<div class="eyebrow" style="color:#e9c78c">Ruang produksi</div>
+<h2>Persiapan dapur</h2>
+<p>Setiap pesanan yang selesai menambah saldo dan reputasi. Pesanan tren memberi bonus.</p>
+<div class="mini-grid">
+<div class="mini"><small>Bahan tersedia</small><strong id="stock">8</strong></div>
+<div class="mini"><small>Peralatan</small><strong id="equipment">Lv. 1</strong></div>
+<div class="mini"><small>Pengikut</small><strong id="followers">0</strong></div>
+<div class="mini"><small>Jadwal aktor</small><strong id="acting">Belum</strong></div>
+</div>
+<div class="actions"><button class="primary" id="upgradeBtn">Lihat pengembangan</button></div>
+</aside>
+</div>
+</section>
+
+<section class="screen" id="story">
+<div class="story">
+<div class="eyebrow">Di balik etalase · Album perjalanan</div>
+<h2>Setiap hari punya cerita.</h2>
+<div class="story-box">
+<div class="eyebrow" id="chapterLabel" style="color:#e9c78c">Bab 1 · Aroma pertama</div>
+<h2 id="storyTitle" style="color:var(--cream)">Sebuah kios di Bangkok</h2>
+<p id="storyText">Angkasa baru saja menyewa kios mungil di sudut jalan Bangkok. Pagi hari ia membaca naskah untuk syuting, sore hari ia menimbang tepung dan menata etalase. Ia belum punya banyak pelanggan, tetapi ia punya resep keluarga dan keberanian untuk mencoba.</p>
+<div class="story-actions">
+<button class="primary" id="storyNext">Lanjutkan cerita</button>
+<button class="quiet" id="storyBack" style="color:var(--cream);border-color:#d5d9ce">Kembali ke toko</button>
+</div>
+</div>
+<p class="notice" id="storyNotice" aria-live="polite"></p>
+</div>
+</section>
+
+<section class="screen" id="upgrades">
+<div class="eyebrow">Pengembangan toko</div>
+<h2>Buat dapur makin siap.</h2>
+<p style="color:var(--muted)">Belanjakan saldo untuk meningkatkan kapasitas produksi dan pengalaman pelanggan.</p>
+<div class="shop-grid" id="upgradeList"></div>
+<div class="actions"><button class="quiet" id="upgradeBack">Kembali ke toko</button></div>
+<p class="notice" id="upgradeNotice" aria-live="polite"></p>
+</section>
+
+<section class="screen" id="settings">
+<div class="eyebrow">Preferensi permainan</div>
+<h2>Atur pengalamanmu.</h2>
+<div class="panel" style="max-width:700px">
+<div class="form-row"><div><strong>Efek suara</strong><br><small>Suara singkat saat aksi berhasil</small></div><input type="checkbox" id="soundToggle" checked aria-label="Aktifkan efek suara"></div>
+<div class="form-row"><div><strong>Tingkat tantangan</strong><br><small>Memengaruhi harga bahan dan bonus</small></div><select id="difficulty"><option value="easy">Santai</option><option value="normal">Seimbang</option><option value="hard">Menantang</option></select></div>
+<div class="form-row"><div><strong>Animasi</strong><br><small>Kurangi gerakan dekoratif</small></div><input type="checkbox" id="motionToggle" aria-label="Kurangi animasi"></div>
+<p class="notice" id="settingsNotice" aria-live="polite">Pengaturan tersimpan otomatis di perangkat ini.</p>
+<div class="actions">
+<button class="quiet" id="resetBtn">Hapus progres tersimpan</button>
+<button class="secondary" id="settingsBack">Selesai</button>
+</div>
+</div>
+</section>
+
+<section class="screen" id="ending">
+<div class="story">
+<div class="eyebrow">Epilog · Sebuah rumah bernama bahagia</div>
+<div class="story-box">
+<div style="font-size:42px" aria-hidden="true">🌼 🥂</div>
+<h2 style="color:var(--cream)">Dari etalase kecil, menuju hari istimewa.</h2>
+<p>Beberapa tahun berlalu. Angkasa kini dikenal sebagai aktor sekaligus pemilik toko kue yang menjadi tempat singgah favorit di Bangkok. Dalam sebuah acara amal, ia akhirnya berbincang lebih lama dengan seseorang yang sejak dulu ia kagumi—seorang seniman yang selalu mendukung karya-karyanya dari kejauhan.</p>
+<p>Persahabatan mereka tumbuh menjadi cinta yang saling menghargai. Pada hari yang hangat, di antara keluarga, sahabat, dan aroma kue favorit, Angkasa dan orang yang ia kagumi mengikat janji untuk menjalani hidup bersama.</p>
+<p>Tokonya tetap buka. Kini, ada satu kursi di dekat jendela yang selalu disiapkan untuk dua orang.</p>
+<div class="story-actions">
+<button class="primary" id="endingRestart">Main lagi dari awal</button>
+<button class="quiet" id="endingHome" style="color:var(--cream);border-color:#d5d9ce">Ke beranda</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer><span>© 2026 Kue Angkasa · Cerita fiksi di Bangkok</span><span>Diracik dengan sabar, disajikan hangat.</span></footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-card">
+<div class="eyebrow">Kue Angkasa</div>
+<h2 id="modalTitle">Jeda sebentar</h2>
+<div id="modalBody"><p>Permainan dijeda.</p></div>
+<div class="modal-actions" id="modalActions"></div>
+</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+'use strict';
+const KEY='app_v1_state';
+const DAYS=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+const RECIPES=[
+{name:'Thai Tea Cream Bun',emoji:'🧋',price:34,cost:12,trend:true,desc:'Roti lembut dengan krim thai tea.'},
+{name:'Mango Sticky Rice Tart',emoji:'🥭',price:42,cost:16,trend:false,desc:'Tart mangga dengan sentuhan ketan.'},
+{name:'Coconut Pandan Roll',emoji:'🍃',price:30,cost:10,trend:false,desc:'Gulungan pandan dan kelapa.'},
+{name:'Strawberry Milk Cake',emoji:'🍓',price:38,cost:14,trend:false,desc:'Kue susu dengan stroberi segar.'},
+{name:'Chocolate Cloud',emoji:'🍫',price:36,cost:13,trend:false,desc:'Kue cokelat dengan krim ringan.'},
+{name:'Butter Croissant',emoji:'🥐',price:28,cost:9,trend:false,desc:'Pastry renyah berlapis mentega.'}
+];
+const UPGRADES=[
+{id:'oven',name:'Oven presisi',emoji:'♨️',price:90,desc:'Produksi lebih efisien. Bonus saldo +฿4 per pesanan.'},
+{id:'display',name:'Etalase kaca',emoji:'🪟',price:120,desc:'Tampilan toko lebih menarik. Popularitas bertambah.'},
+{id:'social',name:'Kamera konten',emoji:'📸',price:150,desc:'Ko
